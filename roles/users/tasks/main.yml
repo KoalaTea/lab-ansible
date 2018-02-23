@@ -1,0 +1,12 @@
+---
+# tasks file for users
+  - name: include password var
+    include_vars: "password.yml"
+
+  - name: set root and student password
+    user:
+        name: "{{ item }}"
+        password: "{{ user_password }}"
+    with_items:
+        - root
+        - student

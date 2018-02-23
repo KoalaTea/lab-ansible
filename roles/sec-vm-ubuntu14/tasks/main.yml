@@ -1,2 +1,18 @@
 ---
 # tasks file for sec-vm-ubuntu14
+  - name: update and upgrade apt
+    apt:
+        update_cache: yes
+        upgrade: dist
+
+  - name: set hostname to CSEC-ubuntu14
+    hostname:
+        name: CSEC-ubuntu14
+
+  - name: set password for root and student
+    user:
+        name: "{{ item }}"
+        password: "{{ user_password }}"
+    with_items:
+        - root
+        - student

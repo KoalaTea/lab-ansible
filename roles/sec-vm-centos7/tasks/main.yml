@@ -1,2 +1,19 @@
 ---
 # tasks file for sec-vm-centos7
+  - name: update and upgrade packages
+    yum:
+        update_cache: yes
+        name: "*"
+        state: latest
+
+  - name: set hostname to CSEC-centos7
+    hostname:
+        name: CSEC-centos7
+
+  - name: set root and student passwords
+    user:
+        user: "{{ item }}"
+        password: "{{ user_password }}"
+    with_items:
+        - root
+        - student

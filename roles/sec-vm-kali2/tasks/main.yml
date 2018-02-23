@@ -1,2 +1,10 @@
 ---
 # tasks file for sec-vm-kali2
+  - name: set hostname to CSEC
+    hostname:
+        name: CSEC
+
+  - name: update package manager
+    apt:
+        update_cache: yes
+        upgrade: dist

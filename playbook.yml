@@ -1,0 +1,5 @@
+---
+- hosts: sec-vm-kali2
+  roles:
+      - sec-vm-kali2
+      - users
