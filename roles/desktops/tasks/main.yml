@@ -1,2 +1,17 @@
 ---
 # tasks file for desktops
+
+  - name: delete all scheduled tasks
+    win_scheduled_task:
+        name: "*"
+        state: absent
+
+  - name: add restart task
+    win_scheduled_task:
+        name: RestartComputer
+        time: 4am
+        frequency: daily
+        enabled: True
+        executable: shutdown
+        arguments: /t 0 /r
+        state: present
