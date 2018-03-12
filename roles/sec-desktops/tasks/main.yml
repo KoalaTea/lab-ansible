@@ -2,3 +2,37 @@
 # tasks file for sec-desktops
 - name: Disable npcap loopback adapter
   win_command: netsh interface set interface "Npcap Loopback Adapter" admin=disable
+
+# delete all scheduled tasks it is deep frozen, we do not care about most of there
+# turn off windows update service
+- name: disable windows update service
+  win_service:
+      name: wuauserv
+      start_mode: disabled
+      state: stopped
+
+# install 585 auditing tools
+# install 7zip
+# install adobe flash
+# install adobe reader
+# install assembler
+# install avaya
+# install audacity
+# install CDBurner XP
+# install Chrome
+# install DevC++ v4.9.9.2
+# install Filezilla Client
+# install Filezilla Server
+# install firefox
+# install java
+# install Notepad++
+# install Office 2010
+# install PolyCom
+# install Putty
+# install Rational developer for System Z 
+# install visio 2010
+# install VMWare workstation
+# install vsphere client
+# install wildpackets
+# install winscp
+# install wireshark
