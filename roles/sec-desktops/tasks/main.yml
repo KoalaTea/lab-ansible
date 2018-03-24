@@ -4,12 +4,6 @@
   win_command: netsh interface set interface "Npcap Loopback Adapter" admin=disable
 
 # delete all scheduled tasks it is deep frozen, we do not care about most of there
-# turn off windows update service
-- name: disable windows update service
-  win_service:
-      name: wuauserv
-      start_mode: disabled
-      state: stopped
 
 # install 585 auditing tools
 # install 7zip
@@ -36,3 +30,7 @@
 # install wildpackets
 # install winscp
 # install wireshark
+# install GNS3
+# install vagrant
+# install virtualbox
+# install docker

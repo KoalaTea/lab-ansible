@@ -1,11 +1,13 @@
 ---
 # tasks file for desktops
 
+  # delete all scheduled tasks it is deep frozen, we do not care about most of there
   - name: delete all scheduled tasks
     win_scheduled_task:
         name: "*"
         state: absent
 
+  # put in our daily restart task
   - name: add restart task
     win_scheduled_task:
         name: RestartComputer
@@ -15,3 +17,33 @@
         executable: shutdown
         arguments: /t 0 /r
         state: present
+
+  # disable windows update service
+  - name: disable windows update
+    win_service:
+        name: wuauserv
+        start_mode: disabled
+        state: stopped
+
+  # see if there is a way to do this I am unsure if this line works it probably changes reg like we
+  # do below
+  - name: disable windows update gpedit
+    win_security_policy:
+        section: Windows Update
+        key: Configure Automatic Updates
+
+  # may also need NoRestartWithLoggedOnUsers (unsure on this key double check)
+  - name: disable windows update registry
+    win_regedit:
+        path: HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU
+        name: NoAutoUpdate
+        data: 1
+        type: dword
+
+  # unsure if this one is needed
+  #- name: disable windows update registry
+  #  win_regedit:
+  #      path: HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU
+  #      name: AUOptions
+  #      data: 1
+  #      type: dword
